@@ -15,7 +15,7 @@ port = if argv.protocol is 'https' then 443 else 80
 https = require(argv.protocol);
 options = {
   host: argv.host,
-  path: '/api/v1/get_access_token?grant_type=client_credentials',
+  path: '/api/v1/get_access_token?grant_type=client_credentials&scope=stream',
   port: port,
   headers: {
     "Authorization": "Basic " + client_credentials
@@ -33,8 +33,7 @@ callback = (response) ->
     stream_messages(auth) if auth.access_token?
   )
 
-req = https.request(options, callback)
-req.end()
+req = https.get(options, callback)
 
 stream_messages = (auth) ->
   options = {
@@ -57,6 +56,6 @@ stream_messages = (auth) ->
       console.log("Stream ended")
     )
 
-  req = https.request(options, callback)
+  req = https.get(options, callback)
   req.end()
   

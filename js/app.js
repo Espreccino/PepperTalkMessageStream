@@ -23,7 +23,7 @@
 
   options = {
     host: argv.host,
-    path: '/api/v1/get_access_token?grant_type=client_credentials',
+    path: '/api/v1/get_access_token?grant_type=client_credentials&scope=stream',
     port: port,
     headers: {
       "Authorization": "Basic " + client_credentials
@@ -48,9 +48,7 @@
     });
   };
 
-  req = https.request(options, callback);
-
-  req.end();
+  req = https.get(options, callback);
 
   stream_messages = function(auth) {
     options = {
@@ -74,7 +72,7 @@
         return console.log("Stream ended");
       });
     };
-    req = https.request(options, callback);
+    req = https.get(options, callback);
     return req.end();
   };
 

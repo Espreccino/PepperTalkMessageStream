@@ -6,4 +6,4 @@ This sample app is a node.js implementation written in coffee script using plain
 ## Quick Start
 * npm install
 * grunt
-* node js/app.coffee --client_id *your client id* --client_secret *your client secret*
+* node js/app.js --client_id *your client id* --client_secret *your client secret*
